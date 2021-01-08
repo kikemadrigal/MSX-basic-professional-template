@@ -1,3 +1,13 @@
+@echo off
+rem dependences
+    rem java JRE
+    rem disk-manager
+    rem deletecomments
+    rem disk2rom
+    rem mkcas
+    rem mcp
+    rem Emulators: bluemsx, openmsx, fuse
+
 rem Varibles de configuración
 set TARGET_CAS=juego.cas
 set TARGET_WAV=juego.wav
