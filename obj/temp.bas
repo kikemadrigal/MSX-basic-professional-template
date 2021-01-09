@@ -17,7 +17,7 @@
 
 
 
-5 cls:screen 1: print "hola desde main"
+5 cls:screen1:print"hola desde main"
 
 
 1 ' Inicializamos managers'

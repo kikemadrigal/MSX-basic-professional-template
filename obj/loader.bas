@@ -13,7 +13,7 @@
 1 ' Mostramos la pantalla de carga'
 30 bload "loader.sc2", s
 40 OPEN"grp:"AS#1:COLOR15:PRESET(0,10):PRINT#1,"Cargando...":close #1
-50 goto 50
+
 
 1 ' Definicimos la estructura de nuestras entidades'
 
@@ -32,7 +32,7 @@
 
 
 1 ' Cargamos el main'
-1 '3000 load "game.bas",r
+3000 load "game.bas",r
 
 
 

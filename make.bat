@@ -1,6 +1,7 @@
 @echo off
 rem dependences
-    rem java JRE
+    rem java JRE >=1.8
+    rem python>3.5 for tokenizer
     rem disk-manager
     rem deletecomments
     rem disk2rom
@@ -122,7 +123,7 @@ rem Esta función prepará los archivos fuente pata incluirlos en un dsk, cas
     copy src\autoexec.bas obj
     copy src\loader.bas obj
 
-    rem Unimos los temprales a unico archivo llamado game.bas y borramos los temporales
+    rem Unimos los temporales a unico archivo llamado game.bad y borramos los temporales
     rem Creamos el archivo temporal que después quitaremos los comentarios
     rem type null > obj\temp.bas
     copy "obj\main.bas"+"obj\entity.bas"+"obj\map.bas"+"obj\input.bas"+"obj\physics.bas"+"obj\collision.bas"+"obj\render.bas"+"obj\ai.bas" "obj\temp.bas"
@@ -130,10 +131,14 @@ rem Esta función prepará los archivos fuente pata incluirlos en un dsk, cas
     
     rem Le quitamos los comentarios a temp.bas
     if not exist tools\deletecomments1.3 GOTO :not_exist_deletecomments
-    java -jar tools\deletecomments1.3\deletecomments1.3.jar obj\temp.bas obj\game.bas
+    java -jar tools\deletecomments1.3\deletecomments1.3.jar obj\temp.bas obj\game.bad
+
+    rem lo tokenizamos
+    if not exist tools\tokenizer\msxbatoken.py GOTO :not_exist_tokenizer
+    tools\tokenizer\msxbatoken.py obj\game.bad
     rem escribe tyoe /? y find /? paa más ayuda
     rem type obj\temp.bas | find /V  "1 '"  > obj\game.bas
-    echo Comentarios eliminados y creado game.bas
+    echo Comentarios eliminados y creado game.bas tokenizado
 goto:eof
 
 
@@ -282,6 +287,9 @@ goto :end
 goto :end
 :not_exist_disk_manager
     echo "Not exit diskmanager"
+goto :end
+:not_exist_tokenizer
+    echo "Not exit tokenizer"
 goto :end
 :not_exist_emulators
     echo "Not exit emulators"
