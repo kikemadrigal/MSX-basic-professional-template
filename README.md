@@ -1,8 +1,13 @@
-# Plantilla profesinal MSX Basic
+# 10 liner contest
 
-## Crea la carpeta tools en el directorio raiz y copia estos programas dentro de la carpeta: 
+Juego ceado para 10 liner contest
+Ceado set for 10 liner contest
 
-http://msx.tipolisto.es/files/Allprograms.zip
+# instructions
 
+El juego consiste en saltar los obstáculos que te van aapreciendo
+The game consists of jumping the obstacles that you will learn
 
-<img src=assets\Platilla-profesional-basic.PNG width=500px/>
+# Play online
+
+http://msx.tipolisto.es/webmsx/standalone/?disk=files/whatchmen.dsk

@@ -44,11 +44,11 @@ goto:eof
 
 :create_all
     call :preparar_archivos_fuente
-    call :convertir_imagenes
+    rem call :convertir_imagenes
     call :crear_dsk
-    call :crear_rom
-    call :crear_cas
-    call :crear_wav
+    rem call :crear_rom
+    rem call :crear_cas
+    rem call :crear_wav
     call :abrir_emulador_con_dsk
 goto:eof
 
@@ -121,7 +121,7 @@ rem Esta función prepará los archivos fuente pata incluirlos en un dsk, cas
         copy "%%a" obj)
     rem Copiamos el autoexec del juego para que se inicie solo y el cargador
     copy src\autoexec.bas obj
-    copy src\loader.bas obj
+
 
     rem Unimos los temporales a unico archivo llamado game.bad y borramos los temporales
     rem Creamos el archivo temporal que después quitaremos los comentarios
@@ -130,12 +130,12 @@ rem Esta función prepará los archivos fuente pata incluirlos en un dsk, cas
     del /F /Q obj\main.bas obj\entity.bas obj\map.bas obj\input.bas obj\physics.bas obj\collision.bas obj\render.bas obj\ai.bas 
     
     rem Le quitamos los comentarios a temp.bas
-    if not exist tools\deletecomments1.3 GOTO :not_exist_deletecomments
-    java -jar tools\deletecomments1.3\deletecomments1.3.jar obj\temp.bas obj\game.bad
+    if not exist tools\deletecomments1.4 GOTO :not_exist_deletecomments
+    java -jar tools\deletecomments1.4\deletecomments1.4.jar obj\temp.bas obj\game.bas
 
     rem lo tokenizamos
-    if not exist tools\tokenizer\msxbatoken.py GOTO :not_exist_tokenizer
-    tools\tokenizer\msxbatoken.py obj\game.bad
+    rem if not exist tools\tokenizer\msxbatoken.py GOTO :not_exist_tokenizer
+    start /wait tools\tokenizer\msxbatoken.py obj\game.bad
     rem escribe tyoe /? y find /? paa más ayuda
     rem type obj\temp.bas | find /V  "1 '"  > obj\game.bas
     echo Comentarios eliminados y creado game.bas tokenizado
@@ -152,7 +152,7 @@ goto:eof
 :convertir_imagenes
     rem Todos los formatos ir a: http://msx.jannone.org/conv/
     rem MSX1
-    tools\Sc2GraphXConv\MSX1-Graphic-Converter\binaries\windows\GraphxConv.exe assets\loader.bmp bin\loader.sc2 -i=0
+    rem tools\Sc2GraphXConv\MSX1-Graphic-Converter\binaries\windows\GraphxConv.exe assets\loader.bmp bin\loader.sc2 -i=0
     del /F /Q gmon.out
 goto:eof
 

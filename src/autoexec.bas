@@ -1,1 +1,1 @@
-10 load"loader.bas",r
+10 load"game.bas",r
