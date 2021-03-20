@@ -43,8 +43,6 @@ goto:eof
 
 
 :create_all
-    call :preparar_archivos_fuente
-    rem call :convertir_imagenes
     call :crear_dsk
     rem call :crear_rom
     rem call :crear_cas
@@ -116,6 +114,17 @@ rem Esta función prepará los archivos fuente pata incluirlos en un dsk, cas
     rem creamos la carpeta obj (objects) si no existe, si existe borramos su contenido
     If not exist .\obj (md .\obj) else (call :clean_objets)
 
+    rem necesitamos el .bin de la pantalla de carga y del reproductor de música
+    rem sjasm (http://www.xl2s.tk/) es un compilador de ensamblador z80 que puedo convertir tu código ensamblador en los archivos binarios.rom y .bin
+    rem start /wait tools/sjasm42c/sjasm.exe src/scloader.asm
+    rem start /wait tools/sjasm42c/sjasm.exe src/rutinas.asm
+    rem start /wait tools/sjasm/sjasm.exe src/music.asm
+    rem move /Y scloader.bin ./obj
+    rem move /Y scloader.lst ./obj
+    rem move /Y rutinas.bin ./obj
+    rem move /Y rutinas.lst ./obj
+
+
     rem Copiamos todos los archivos.bas de la carpeta de src(fuentes)/game a la carpeta obj y mostramos un mensaje
     for /R src/game %%a in (*.bas) do (
         copy "%%a" obj)
@@ -153,7 +162,7 @@ goto:eof
     rem Todos los formatos ir a: http://msx.jannone.org/conv/
     rem MSX1
     rem tools\Sc2GraphXConv\MSX1-Graphic-Converter\binaries\windows\GraphxConv.exe assets\loader.bmp bin\loader.sc2 -i=0
-    del /F /Q gmon.out
+    rem del /F /Q gmon.out
 goto:eof
 
 
